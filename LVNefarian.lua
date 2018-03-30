@@ -64,7 +64,7 @@ LVBM.AddOns.Nefarian = {
 				end
 				
 				if (math.mod(LVBM.AddOns.Nefarian.DrakonidKillCount,5) == 0) then
-					LVBM.AddMsg( string.format("*** %d Drakonids down ***", LVBM.AddOns.Nefarian.DrakonidKillCount) );
+					LVBM.Announce(string.format(LVBM_NEFARIAN_SYNCKILLS_ANNOUNCE, LVBM.AddOns.Nefarian.DrakonidKillCount));
 				end
 			end
 
@@ -75,11 +75,14 @@ LVBM.AddOns.Nefarian = {
 			elseif arg1 == LVBM_NEFARIAN_CAST_FEAR then
 				LVBM.Announce(LVBM_NEFARIAN_FEAR_WARNING);
 				LVBM.StartStatusBarTimer(1.5, "Fear Cast");
+				LVBM.EndStatusBarTimer("Fear");
+				LVBM.StartStatusBarTimer(30, "Fear");
 			end
 		elseif event == "CHAT_MSG_MONSTER_YELL" then
 			if arg1 == LVBM_NEFARIAN_YELL_PHASE2 then
 				LVBM.Announce(LVBM_NEFARIAN_PHASE2_WARNING);
 				LVBM.StartStatusBarTimer(15, "Phase 2");
+				LVBM.StartStatusBarTimer(43, "Fear");
 			elseif arg1 == LVBM_NEFARIAN_YELL_PHASE3 then
 				LVBM.Announce(LVBM_NEFARIAN_PHASE3_WARNING);
 			elseif string.find(arg1, "Shamans") then
